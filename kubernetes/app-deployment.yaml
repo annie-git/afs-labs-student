@@ -1,28 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: <NAME>
-  namespace: <YOUR NAMESPACE>
+  name: app-deployment
+  namespace: amafo
   labels:
-    app: <APP>
+    app: app
 spec:
-  replicas: <REPLICAS>
+  replicas: 1
   strategy:
     type: Recreate
   minReadySeconds: 20
   selector:
     matchLabels:
-      app: <APP>
+      app: app
   template:
     metadata:
       labels:
-        app: <APP>
+        app: app
     spec:
       containers:
       - envFrom:
         - secretRef:
             name: db-secret
-        name: <NAME>
-        image: <IMAGE URL>
+        name: app-deployment
+        image: harbor.dev.afsmtddso.com/am-harbor-project/app:971c881-1db19b3
         ports:
-        - containerPort: <CONTAINER PORT>
+        - containerPort: 5000
